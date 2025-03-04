@@ -1,0 +1,25 @@
+/*Import font*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
+:root{
+    --background-color-body: #282F44;
+    --background-color-navbar: #191D32;
+    --color-text: #f0f0f0;
+    --font-family: 'Roboto', sans-serif;
+}
+
+
+
+body {
+    background-color: var(--background-color-body); 
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family); 
+}
+
+* {
+    box-sizing: border-box;
+}

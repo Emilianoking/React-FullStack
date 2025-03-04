@@ -1,0 +1,34 @@
+.navbar{
+    background-color: var(--background-color-navbar);
+    padding: 15px;
+}
+
+.navbar ul{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+.navbar a{
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover{
+    color: #ffcc00;
+}
+
+
+
+
+
+
+
+
+
+
+
+
