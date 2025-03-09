@@ -1,6 +1,14 @@
 .navbar{
     background-color: var(--background-color-navbar);
     padding: 15px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+
 }
 
 .navbar ul{
@@ -8,6 +16,8 @@
     list-style: none;
     justify-content: center;
     gap: 20px;
+    padding: 0;
+    margin: 0;
 }
 
 
@@ -15,6 +25,7 @@
     color: var(--color-text);
     text-decoration: none;
     font-weight: bold;
+    font-size: 1rem;
 }
 
 .navbar a:hover{
@@ -22,13 +33,33 @@
 }
 
 
+/* estilos para icono del carrito */
 
+.cartContainer{
+    position: relative;
+}
 
+.cartContainer span{
+    position: relative;
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    
+}
 
-
-
-
-
-
-
-
+.cartBadge{
+    position: absolute;
+    top: -10px;
+    right: -12px;
+    background-color: red;
+    font-weight: bold;
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 20px;
+    height: 20px;
+    line-height: 1;
+}

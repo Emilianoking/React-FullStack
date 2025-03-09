@@ -4,36 +4,31 @@ import Navbar from './components/Navbar'
 import '../styles/globals.css';
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import { CartProvider } from '@/context/CartContext';
 
-//TODO: Importar el CartProvider de productos 
 
 
-export default function RootLayout({children}) {
+export default function RootLayout({ children }) {
   return (
 
     <html lang='es'>
       <body>
 
-        //TODO: Agregar el CartProvider de productos
+        <CartProvider>
+          <header>
+            <Navbar/>
+          </header>
 
+          {/* Main */}
+          <main className='mainContet'>{children}</main>
 
-
-        <header>
-           {/* Importar el Navbar */}
-           <Navbar></Navbar>
-        </header>
-        <main>{children}</main>
-
-        {/* Footer */}
-        <footer>
-          <p>© 2025 - Todos los derechos reservados</p>
-        </footer>
-
+          {/* Footer */}
+          <footer>
+            <p>© 2025 - Todos los derechos reservados</p>
+          </footer>
+        </CartProvider>
       </body>
-
-
     </html>
-    
   );
 }
 
