@@ -8,9 +8,6 @@ import { useCart } from "@/context/CartContext";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 
 
-
-
-
 export default function Navbar() {
 
   const { cartItems } = useCart();//obtener los items del carrito
