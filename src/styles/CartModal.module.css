@@ -1,0 +1,105 @@
+.modalHeader {
+    background-color: #78B4DC; /* Azul claro */
+    color: #FFFFFF;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .modalBody {
+    background-color: #F0F8FA; /* Fondo claro consistente con el cuerpo */
+    padding: 20px;
+  }
+  
+  .emptyCart {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+  }
+  
+  .cartItem {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #E0E0E0;
+  }
+  
+  .cartItemContent {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .cartItemImage {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-right: 15px;
+    background-color: #F9F9F9;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .cartItemDetails {
+    flex: 1;
+  }
+  
+  .cartItemDetails h6 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .cartItemDetails p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+  }
+  
+  .removeButton {
+    background-color: #FF4D4D !important;
+    border-color: #FF4D4D !important;
+    font-size: 0.85rem !important;
+    padding: 4px 10px !important;
+  }
+  
+  .removeButton:hover {
+    background-color: #E63939 !important;
+    border-color: #E63939 !important;
+  }
+  
+  .total {
+    text-align: right;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid #E0E0E0;
+  }
+  
+  .total h5 {
+    font-size: 1.2rem;
+    color: #78B4DC;
+    margin: 0;
+  }
+  
+  .modalFooter {
+    background-color: #F0F8FA;
+    border-top: 1px solid #E0E0E0;
+  }
+  
+  .closeButton {
+    background-color: #666 !important;
+    border-color: #666 !important;
+  }
+  
+  .closeButton:hover {
+    background-color: #555 !important;
+    border-color: #555 !important;
+  }
+  
+  .checkoutButton {
+    background-color: #AADCC8 !important;
+    border-color: #AADCC8 !important;
+  }
+  
+  .checkoutButton:hover {
+    background-color: #78B4DC !important;
+    border-color: #78B4DC !important;
+  }

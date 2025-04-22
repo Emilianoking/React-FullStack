@@ -1,0 +1,201 @@
+/* Hero Section */
+.heroSection {
+    background: linear-gradient(180deg, #78B4DC 30%, #F0F8FA 100%);
+    color: var(--color-text-light);
+    padding: 100px 0;
+    text-align: center;
+  }
+  
+  .heroLogo {
+    width: 180px;
+    margin-bottom: 35px;
+    border-radius: 20%;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  }
+  
+  .heroTitle {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .heroText {
+    font-size: 1.3rem;
+    margin: 0 auto 30px;
+    max-width: 600px;
+    opacity: 0.9;
+  }
+  
+  .heroButton {
+    background-color: #AADCC8 !important;
+    border-color: #AADCC8 !important;
+    font-size: 1.2rem !important;
+    padding: 12px 30px !important;
+    transition: transform 0.2s ease !important;
+  }
+  
+  .heroButton:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Productos Destacados */
+  .featuredSection {
+    padding: 60px 0;
+    background-color: var(--background-color-body);
+  }
+  
+  .featuredTitle {
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.8rem;
+    font-weight: 700;
+  }
+  
+  .featuredCard {
+    background-color: #FFFFFF !important;
+    color: var(--color-text) !important;
+    border: 1px solid #E0E0E0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  }
+  
+  .featuredCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .featuredCardImg {
+    height: 220px !important;
+    object-fit: contain !important;
+    padding: 15px !important;
+    background-color: #F9F9F9 !important;
+  }
+  
+  .featuredCardBody {
+    text-align: center !important;
+  }
+  
+  .featuredCardTitle {
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .featuredCardPrice {
+    font-size: 1.1rem !important;
+    color: #78B4DC !important;
+  }
+  
+  .featuredCardButton {
+    background-color: #AADCC8 !important;
+    border-color: #AADCC8 !important;
+    font-size: 1rem !important;
+    padding: 8px 20px !important;
+    transition: background-color 0.3s ease !important;
+  }
+  
+  .featuredCardButton:hover {
+    background-color: #78B4DC !important;
+    border-color: #78B4DC !important;
+  }
+  
+  /* Llamada a la Acción */
+  .ctaSection {
+    background-color: #AADCC8;
+    padding: 50px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ctaTitle {
+    color: var(--color-text-light);
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  
+  .ctaText {
+    color: var(--color-text-light);
+    font-size: 1.2rem;
+    margin-bottom: 35px;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+  }
+  
+  .ctaButtonPrimary {
+    background-color: #78B4DC !important;
+    border-color: #78B4DC !important;
+    font-size: 1.1rem !important;
+    padding: 10px 25px !important;
+    margin-right: 15px !important;
+    transition: transform 0.2s ease !important;
+  }
+  
+  .ctaButtonPrimary:hover {
+    transform: scale(1.05);
+  }
+  
+  .ctaButtonSecondary {
+    background-color: transparent !important;
+    border-color: var(--color-text-light) !important;
+    color: var(--color-text-light) !important;
+    font-size: 1.1rem !important;
+    padding: 10px 25px !important;
+    transition: background-color 0.3s ease, transform 0.2s ease, color 0.3s ease !important;
+  }
+  
+  .ctaButtonSecondary:hover {
+    background-color: var(--color-text-light) !important;
+    color: #AADCC8 !important;
+    transform: scale(1.05);
+  }
+  
+  /* Beneficios */
+  .benefitsSection {
+    padding: 60px 0;
+    background-color: var(--background-color-body);
+  }
+  
+  .benefitsTitle {
+    color: var(--color-text);
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.8rem;
+    font-weight: 700;
+  }
+  
+  .benefitsCard {
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    color: var(--color-text);
+    border: 1px solid #E0E0E0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .benefitsCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .benefitsIcon {
+    font-size: 3rem;
+    color: #78B4DC;
+    margin-bottom: 20px;
+  }
+  
+  .benefitsCardTitle {
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+  
+  .benefitsCardText {
+    font-size: 1rem;
+    color: #666;
+  }

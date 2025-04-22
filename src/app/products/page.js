@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Container, Card, Button, Row, Col, Spinner, Alert } from "react-bootstrap";
 import { useCart } from "@/context/CartContext"; // Importa el contexto del carrito
+import styles from "@/styles/Products.module.css"; // Importa los estilos modulares
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]); // Estado para los productos
@@ -22,32 +23,39 @@ export default function ProductsPage() {
   }, []); // Se ejecuta solo una vez al montar el componente
 
   return (
-    <Container className="mt-4">
-      <h1 className="mb-4">Lista de Productos</h1>
+    <Container className={styles.productsContainer}>
+      <h1 className={styles.productsTitle}>Lista de Productos</h1>
 
       {/* Mostrar error si ocurre */}
       {error && <Alert variant="danger">{error}</Alert>}
 
       {/* Mostrar spinner mientras carga */}
       {loading ? (
-        <Spinner animation="border" />
+        <div className={styles.spinnerContainer}>
+          <Spinner animation="border" />
+        </div>
       ) : (
         <Row>
           {products.map((product) => (
             <Col key={product.id} md={4} className="mb-4">
-              <Card>
+              <Card className={styles.productCard}>
                 <Card.Img
                   variant="top"
                   src={product.image}
-                  style={{ height: "200px", objectFit: "contain" }}
+                  className={styles.productCardImg}
                 />
-                <Card.Body>
-                  <Card.Title>{product.title}</Card.Title>
-                  <Card.Text>
+                <Card.Body className={styles.productCardBody}>
+                  <Card.Title className={styles.productCardTitle}>
+                    {product.title}
+                  </Card.Title>
+                  <Card.Text className={styles.productCardPrice}>
                     <strong>${product.price}</strong>
                   </Card.Text>
-                  <Button variant="primary" onClick={() => addToCart(product)}>
-                    🛒 Agregar al carrito
+                  <Button
+                    className={styles.productCardButton}
+                    onClick={() => addToCart(product)}
+                  >
+                    🛒 Agregar al Carrito
                   </Button>
                 </Card.Body>
               </Card>
@@ -56,9 +64,5 @@ export default function ProductsPage() {
         </Row>
       )}
     </Container>
-  );
+  );
 }
-
-
-
-

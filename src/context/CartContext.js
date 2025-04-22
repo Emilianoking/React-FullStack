@@ -1,41 +1,40 @@
-"use client" // Requerido para usar los hooks en Next.js
+"use client";
+import React, { createContext, useContext, useState } from 'react';
 
-import { createContext, useState, useContext } from "react"
-
-// Crear el contexto de productos
 const CartContext = createContext();
 
+export function CartProvider({ children }) {
+  const [cartItems, setCartItems] = useState([]); // Aseguramos que siempre sea un array
 
-// Proveedor de productos - contexto
-export const CartProvider = ({children}) => {
-    const [cartItems, setCartItems] = useState([]);
+  const addToCart = (product) => {
+    setCartItems((prevItems) => {
+      // Convertimos los IDs a string para evitar problemas de comparación
+      const productId = String(product.id);
+      const existingItem = prevItems.find((item) => String(item.id) === productId);
 
-    // Funcion para agregar productos al carrito
-    const addToCart = (product) => {
-        setCartItems((prevCart)=> [...prevCart, product]);
-    };
+      if (existingItem) {
+        return prevItems.map((item) =>
+          String(item.id) === productId
+            ? { ...item, quantity: (item.quantity || 1) + 1 }
+            : item
+        );
+      }
 
-    return (
-        <CartContext.Provider value={{cartItems, addToCart}}>
-            {children}
-        </CartContext.Provider>
-    );
-};
+      return [...prevItems, { ...product, quantity: 1 }];
+    });
+  };
 
-// Hook personalizado para usar el contexto de productos
-export const useCart = () => useContext(CartContext);
+  const removeFromCart = (productId) => {
+    setCartItems((prevItems) => prevItems.filter((item) => String(item.id) !== String(productId)));
+  };
 
+  return (
+    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+      {children}
+    </CartContext.Provider>
+  );
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+export function useCart() {
+  return useContext(CartContext);
+}

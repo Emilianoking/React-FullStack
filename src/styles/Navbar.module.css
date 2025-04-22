@@ -1,5 +1,7 @@
-.navbar{
-    background-color: var(--background-color-navbar);
+.navbar {
+    background-color: rgba(120, 180, 220, 0.2); /* Azul claro traslúcido (20% de opacidad) */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    -webkit-backdrop-filter: blur(10px); /* Soporte para navegadores WebKit */
     padding: 15px;
     position: fixed;
     width: 100%;
@@ -8,10 +10,10 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
-
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil para el efecto glass */
 }
 
-.navbar ul{
+.navbar ul {
     display: flex;
     list-style: none;
     justify-content: center;
@@ -20,46 +22,51 @@
     margin: 0;
 }
 
-
-.navbar a{
-    color: var(--color-text);
+.navbar a {
+    color: #FFFFFF; /* Texto blanco para mejor contraste */
     text-decoration: none;
     font-weight: bold;
     font-size: 1rem;
+    transition: color 0.3s ease;
 }
 
-.navbar a:hover{
-    color: #ffcc00;
+.navbar a:hover {
+    color: #AADCC8; /* Verde menta claro al pasar el mouse */
 }
 
-
-/* estilos para icono del carrito */
-
-.cartContainer{
+/* Estilos para el ícono del carrito */
+.cartContainer {
     position: relative;
+    display: inline-flex; /* Asegura que el contenedor se ajuste al ícono */
+    align-items: center;
 }
 
-.cartContainer span{
-    position: relative;
-    font-size: 1.5rem;
-    color: white;
+.cartLink {
+    display: inline-flex;
+    align-items: center;
+    color: #FFFFFF; /* Color del ícono del carrito */
     text-decoration: none;
-    
 }
 
-.cartBadge{
+.cartIcon {
+    font-size: 1.5rem;
+}
+
+.cartBadge {
     position: absolute;
-    top: -10px;
-    right: -12px;
-    background-color: red;
+    top: -8px; /* Ajustado para estar más cerca del ícono */
+    right: -8px; /* Ajustado para estar más cerca del ícono */
+    background-color: #FF4D4D; /* Rojo vibrante para el badge */
+    color: #FFFFFF;
     font-weight: bold;
     font-size: 0.75rem;
-    padding: 4px 8px;
+    padding: 2px 6px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 20px;
-    height: 20px;
+    min-width: 18px;
+    height: 18px;
     line-height: 1;
+    border: 1px solid rgba(255, 255, 255, 0.5); /* Borde blanco sutil */
 }

@@ -1,23 +1,22 @@
-/*Import font*/
+/* Import font */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 @import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-:root{
-    --background-color-body: #282F44;
-    --background-color-navbar: #191D32;
-    --color-text: #f0f0f0;
+:root {
+    --background-color-body: #F0F8FA; /* Fondo claro para el cuerpo, un tono suave que complementa el azul y verde */
+    --background-color-accent: #78B4DC; /* Azul claro para secciones destacadas (como la Hero Section) */
+    --background-color-secondary: #AADCC8; /* Verde menta claro para otras secciones */
+    --color-text: #333333; /* Texto oscuro para buen contraste con fondos claros */
+    --color-text-light: #FFFFFF; /* Texto blanco para secciones con fondo más oscuro */
     --font-family: 'Roboto', sans-serif;
 }
 
-
-
 body {
-    background-color: var(--background-color-body); 
+    background-color: var(--background-color-body);
     margin: 0;
     padding: 0;
-    font-family: var(--font-family); 
+    font-family: var(--font-family);
+    color: var(--color-text);
 }
 
 * {
