@@ -71,3 +71,24 @@
     background-color: #78B4DC !important;
     border-color: #78B4DC !important;
   }
+
+  /* Ver más */
+.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.loadMoreButton {
+  background-color: #78B4DC !important;
+  border-color: #78B4DC !important;
+  font-size: 1rem !important;
+  padding: 10px 25px !important;
+  border-radius: 8px !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.loadMoreButton:hover {
+  background-color: #AADCC8 !important;
+  border-color: #AADCC8 !important;
+}
