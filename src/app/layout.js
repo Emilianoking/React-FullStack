@@ -1,6 +1,7 @@
 import React from 'react'
 import "../styles/Navbar.module.css"
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import '../styles/globals.css';
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -23,9 +24,7 @@ export default function RootLayout({ children }) {
           <main className='mainContet'>{children}</main>
 
           {/* Footer */}
-          <footer>
-            <p>© 2025 - Todos los derechos reservados</p>
-          </footer>
+          <Footer />
         </CartProvider>
       </body>
     </html>
