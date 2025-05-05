@@ -19,7 +19,7 @@ export default function Home() {
         if (!response.ok) throw new Error("Error al obtener los productos");
         return response.json();
       })
-      .then((data) => setProducts(data.slice(0, 3))) // Solo los primeros 3 productos
+      .then((data) => setProducts(data.slice(0, 3))) 
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);

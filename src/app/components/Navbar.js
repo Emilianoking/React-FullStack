@@ -42,6 +42,7 @@ export default function Navbar() {
           <li><Link href='/'>Inicio</Link></li>
           <li><Link href='/products'>Productos</Link></li>
           <li><Link href='/users'>Usuarios</Link></li>
+          <li><Link href='/pasarelas' className="btn btn-primary">Ir a Pasarelas</Link></li>
           <li><Link href='/contact'>Contacto</Link></li>
           <li className={styles.cartContainer}>
             <div className={styles.cartLink} onClick={() => setShowModal(true)}>
