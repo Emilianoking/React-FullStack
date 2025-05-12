@@ -3,7 +3,6 @@ import "../styles/Navbar.module.css"
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import '../styles/globals.css';
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import { CartProvider } from '@/context/CartContext';
 
