@@ -1,0 +1,144 @@
+.authSection {
+  background: linear-gradient(135deg, #78B4DC 10%, #AADCC8 90%);
+  padding: 100px 0;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.authSection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+}
+
+.authTitle {
+  color: var(--color-text-light);
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+  letter-spacing: 1px;
+}
+
+.authTabs {
+  max-width: 600px;
+  margin: 0 auto;
+  border: none !important;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombreado para pestañas inactivas */
+
+}
+
+.authTabs .nav-link {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  color: #78B4DC !important;
+  font-weight: 600;
+  font-size: 1.3rem;
+  padding: 15px 30px;
+  border: none !important;
+  transition: all 0.3s ease !important;
+  position: relative;
+  z-index: 1;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombreado para pestañas inactivas */
+  opacity: 0.8; /* Menor opacidad para inactivas */
+}
+
+.authTabs .nav-link:hover {
+  background-color: #FFFFFF !important;
+  color: #AADCC8 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 1; /* Opacidad al 100% al hover */
+}
+
+.authTabs .nav-link.active {
+  background-color: #FFFFFF !important;
+  color: #AADCC8 !important;
+  border-bottom: 3px solid #AADCC8 !important;
+  box-shadow: none; /* Sin sombra en la pestaña activa */
+  opacity: 1; /* Opacidad al 100% en activa */
+}
+
+.authForm {
+  background-color: #FFFFFF;
+  padding: 40px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  max-width: 600px;
+  margin: 0 auto;
+  border-top: 1px solid #E0E0E0;
+  transition: transform 0.3s ease;
+}
+
+.authForm:hover {
+  transform: translateY(-5px);
+}
+
+.formLabel {
+  color: #78B4DC;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.formInput {
+  border: 1px solid #E0E0E0 !important;
+  border-radius: 10px !important;
+  padding: 12px 15px !important;
+  font-size: 1rem !important;
+  background-color: #F9F9F9 !important;
+  transition: all 0.3s ease !important;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.formInput:focus {
+  border-color: #AADCC8 !important;
+  background-color: #FFFFFF !important;
+  box-shadow: 0 0 8px rgba(170, 220, 200, 0.4) !important;
+  transform: scale(1.01);
+}
+
+.authButton {
+  background: linear-gradient(90deg, #AADCC8 0%, #78B4DC 100%) !important;
+  border: none !important;
+  font-size: 1.2rem !important;
+  font-weight: 600;
+  padding: 12px 30px !important;
+  width: 100%;
+  border-radius: 10px !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease !important;
+}
+
+.authButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: 0.5s;
+}
+
+.authButton:hover::before {
+  left: 100%;
+}
+
+.authButton:hover {
+  background: linear-gradient(90deg, #78B4DC 0%, #AADCC8 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}

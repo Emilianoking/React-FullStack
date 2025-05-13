@@ -1,20 +1,19 @@
 "use client";
-import Link from 'next/link';
-import React, { useState } from 'react';
-import { Modal, Button, ListGroup, Image } from 'react-bootstrap';
+import Link from "next/link";
+import React, { useState } from "react";
+import { Modal, Button, ListGroup, Image } from "react-bootstrap";
 import styles from "@/styles/Navbar.module.css";
 import { useCart } from "@/context/CartContext";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import cartModalStyles from "@/styles/CartModal.module.css";
 
 export default function Navbar() {
-  const { cartItems, removeFromCart } = useCart(); // Obtener los ítems del carrito y la función para remover
-  const [showModal, setShowModal] = useState(false); // Estado para controlar el modal
+  const { cartItems, removeFromCart } = useCart();
+  const [showModal, setShowModal] = useState(false);
 
-  // Agrupar ítems por id para evitar duplicados
   const groupedItems = cartItems.reduce((acc, item) => {
-    const itemId = String(item.id);
-    const existingItem = acc.find((i) => String(i.id) === itemId);
+    const itemId = String(item.id || item._id);
+    const existingItem = acc.find((i) => String(i.id || i._id) === itemId);
 
     if (existingItem) {
       existingItem.quantity = (existingItem.quantity || 1) + (item.quantity || 1);
@@ -25,12 +24,10 @@ export default function Navbar() {
     return [...acc, { ...item, quantity: item.quantity || 1, subtotal: (item.price || 0) * (item.quantity || 1) }];
   }, []);
 
-  // Calcular el total general
   const total = groupedItems.length > 0
     ? groupedItems.reduce((sum, item) => sum + (item.subtotal || 0), 0).toFixed(2)
     : "0.00";
 
-  // Calcular la cantidad total de ítems
   const totalItems = groupedItems.length > 0
     ? groupedItems.reduce((sum, item) => sum + (item.quantity || 0), 0)
     : 0;
@@ -39,11 +36,12 @@ export default function Navbar() {
     <>
       <nav className={styles.navbar}>
         <ul>
-          <li><Link href='/'>Inicio</Link></li>
-          <li><Link href='/products'>Productos</Link></li>
-          <li><Link href='/users'>Usuarios</Link></li>
-          <li><Link href='/pasarelas' className="btn btn-primary">Ir a Pasarelas</Link></li>
-          <li><Link href='/contact'>Contacto</Link></li>
+          <li><Link href="/">Inicio</Link></li>
+          <li><Link href="/products">Productos</Link></li>
+          <li><Link href="/users">Usuarios</Link></li>
+          <li><Link href="/auth">Iniciar Sesión</Link></li>
+          <li><Link href="/pasarelas" className="btn btn-primary">Ir a Pasarelas</Link></li>
+          <li><Link href="/contact">Contacto</Link></li>
           <li className={styles.cartContainer}>
             <div className={styles.cartLink} onClick={() => setShowModal(true)}>
               <i className={`bi bi-cart3 ${styles.cartIcon}`}></i>
@@ -55,7 +53,6 @@ export default function Navbar() {
         </ul>
       </nav>
 
-      {/* Modal del Carrito */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton className={cartModalStyles.modalHeader}>
           <Modal.Title>Tu Carrito</Modal.Title>
@@ -67,23 +64,23 @@ export default function Navbar() {
             <>
               <ListGroup variant="flush">
                 {groupedItems.map((item) => (
-                  <ListGroup.Item key={item.id} className={cartModalStyles.cartItem}>
+                  <ListGroup.Item key={item.id || item._id} className={cartModalStyles.cartItem}>
                     <div className={cartModalStyles.cartItemContent}>
                       <Image
-                        src={item.image}
-                        alt={item.title}
+                        src={item.image || item.imageUrl}
+                        alt={item.title || item.name}
                         className={cartModalStyles.cartItemImage}
                       />
                       <div className={cartModalStyles.cartItemDetails}>
-                        <h6>{item.title}</h6>
+                        <h6>{item.title || item.name}</h6>
                         <p>
-                          Precio: ${item.price || "0.00"} x {item.quantity || 1} = $
+                          Precio: ${(item.price || 0).toFixed(2)} x {item.quantity || 1} = $
                           {item.subtotal.toFixed(2)}
                         </p>
                         <Button
                           variant="danger"
                           size="sm"
-                          onClick={() => removeFromCart(item.id)}
+                          onClick={() => removeFromCart(item.id || item._id)}
                           className={cartModalStyles.removeButton}
                         >
                           Eliminar
@@ -110,10 +107,7 @@ export default function Navbar() {
           {groupedItems.length > 0 && (
             <Button
               className={cartModalStyles.checkoutButton}
-              onClick={() => {
-                setShowModal(false);
-                
-              }}
+              onClick={() => setShowModal(false)}
             >
               Proceder al Pago
             </Button>
