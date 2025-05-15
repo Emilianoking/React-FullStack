@@ -59,23 +59,29 @@
   text-align: center;
 }
 
-.userTable {
+.nav-tabs {
+  border-bottom: 2px solid #78B4DC;
+}
+
+.nav-tabs .nav-link {
+  color: #78B4DC;
+  font-weight: 500;
+  padding: 10px 20px;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  background-color: #E6F0FA;
+}
+
+.nav-tabs .nav-link.active {
+  color: #AADCC8;
   background-color: #FFFFFF;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid #AADCC8;
 }
 
-.userTable th,
-.userTable td {
-  padding: 12px;
-  text-align: left;
-}
 
-.userTable th {
-  background-color: #78B4DC;
-  color: #FFFFFF;
-}
 
 .error {
   text-align: center;

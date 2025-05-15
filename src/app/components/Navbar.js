@@ -18,6 +18,7 @@ export default function Navbar() {
     const fetchUserRole = async () => {
       try {
         const token = localStorage.getItem("token");
+        console.log("Token from localStorage:", token); // Log para verificar el token
         if (token) {
           const response = await api.get("/users/me", {
             headers: { Authorization: `Bearer ${token}` },
@@ -54,7 +55,7 @@ export default function Navbar() {
     ? groupedItems.reduce((sum, item) => sum + (item.quantity || 0), 0)
     : 0;
 
-  if (loading) return null; // Evitar renderizado mientras se carga el rol
+  if (loading) return null;
 
   return (
     <>
@@ -62,6 +63,7 @@ export default function Navbar() {
         <ul>
           <li><Link href="/">Inicio</Link></li>
           <li><Link href="/products">Productos</Link></li>
+          <li><Link href="/users">Usuarios</Link></li>
           <li><Link href="/auth">Iniciar Sesión</Link></li>
           <li><Link href="/pasarelas" className="btn btn-primary">Ir a Pasarelas</Link></li>
           <li><Link href="/contact">Contacto</Link></li>
