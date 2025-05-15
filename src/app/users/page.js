@@ -1,70 +1,93 @@
-"use client"
-
-import {useEffect, useState} from 'react'
-import { Container, ListGroup, Form, Spinner, Alert } from 'react-bootstrap'
+"use client";
+import { useState, useEffect } from "react";
+import { Container, ListGroup, Form, Spinner, Alert, Button } from "react-bootstrap";
+import { useRouter } from "next/navigation";
+import api from "@/services/api";
 
 export default function UsersPage() {
-    /* lista de usuarios */
-    const[users, setUsers] = useState([]);
-    /* lista filtrada */
-    const[filteredUsers, setFilteredUsers] = useState([]);
-    /* estado de carga */
-    const[loading, setLoading] = useState(true);
-    /* estado de error */
-    const[error, setError] = useState(null);
-    /* estado de busqueda */
-    const[search, setSearch] = useState('');
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [search, setSearch] = useState("");
+  const router = useRouter();
 
-    //useEffect para cargar los usuarios de la API
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => {
-            if(!response.ok) throw new Error('No se pudo cargar los usuarios');
-            return response.json();
-            })        
-        .then((data) => {
-            setUsers(data);
-            setFilteredUsers(data);
-        })
-        .catch((err) => setError(err.message))
-        .finally(() => setLoading(false));
-    }, []);
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          router.push("/auth");
+          return;
+        }
 
-    useEffect(() => {
-        const results = users.filter((user) => 
-        user.name.toLowerCase().includes(search.toLowerCase())
+        const response = await api.get("/users/me", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const user = response.data;
+        if (user.role !== "admin") {
+          setError("Acceso denegado. Solo para administradores.");
+          router.push("/");
+          return;
+        }
+
+        const usersResponse = await api.get("/users", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUsers(usersResponse.data);
+        setFilteredUsers(usersResponse.data);
+      } catch (err) {
+        setError(err.response?.data?.message || "Error al cargar usuarios");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUsers();
+  }, [router]);
+
+  useEffect(() => {
+    const results = users.filter((user) =>
+      user.name.toLowerCase().includes(search.toLowerCase())
     );
     setFilteredUsers(results);
-    }, [search, users]);
+  }, [search, users]);
 
-return(
+  if (error) {
+    return (
+      <Container className="mt-4">
+        <Alert variant="danger">{error}</Alert>
+        <Button onClick={() => router.push("/")} variant="primary">
+          Volver al Inicio
+        </Button>
+      </Container>
+    );
+  }
+
+  if (loading) {
+    return (
+      <Container className="mt-4">
+        <Spinner animation="border" />
+      </Container>
+    );
+  }
+
+  return (
     <Container className="mt-4">
-        <h1> Lista de Usuarios</h1>
-        {/* Campo de busqueda */}
-        <Form.Control
+      <h1>Lista de Usuarios</h1>
+      <Form.Control
         type="text"
         placeholder="Buscar usuario"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="mb-4"
-        />
-        {/* Mostrar error si lo hay */}
-        {error && <Alert variant="danger">{error}</Alert>}
-
-        {/* Mostrar spinner de carga */}
-        {loading ? (
-            <Spinner animation="border" />
-        ) : (
-            <ListGroup>
-                {filteredUsers.map((user) => (
-                    <ListGroup.Item key={user.id}>
-                        <strong>{user.name}</strong>- 📧 {user.email}
-                    </ListGroup.Item>
-                ))}
-            </ListGroup>
-        )}
+      />
+      <ListGroup>
+        {filteredUsers.map((user) => (
+          <ListGroup.Item key={user._id}>
+            <strong>{user.name}</strong> - 📧 {user.email}
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
     </Container>
-        
-
-)
+  );
 }

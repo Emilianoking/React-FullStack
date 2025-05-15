@@ -1,0 +1,105 @@
+.dashboardContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F0F8FA 0%, #E6F0FA 100%);
+  padding: 0;
+}
+
+.sidebar {
+  background-color: #FFFFFF;
+  border-right: 1px solid #E0E0E0;
+  padding: 20px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.adminCard {
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  background: linear-gradient(180deg, #78B4DC 0%, #AADCC8 100%) !important;
+  color: var(--color-text-light) !important;
+  overflow: hidden;
+}
+
+.adminTitle {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 20px !important;
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.adminInfo {
+  font-size: 1rem;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  color: #333;
+}
+
+.adminInfo p {
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.adminInfo strong {
+  color: #78B4DC;
+}
+
+.mainContent {
+  padding: 40px 20px;
+}
+
+.mainTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #78B4DC;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.userTable {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.userTable th,
+.userTable td {
+  padding: 12px;
+  text-align: left;
+}
+
+.userTable th {
+  background-color: #78B4DC;
+  color: #FFFFFF;
+}
+
+.error {
+  text-align: center;
+  padding: 20px;
+  color: #dc3545;
+  font-size: 1.2rem;
+}
+
+.errorButton {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  font-size: 1.1rem !important;
+  padding: 10px 20px !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.errorButton:hover {
+  background-color: #c82333 !important;
+  border-color: #c82333 !important;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #78B4DC;
+  font-size: 1.2rem;
+}

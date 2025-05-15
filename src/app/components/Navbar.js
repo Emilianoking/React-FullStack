@@ -1,15 +1,37 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button, ListGroup, Image } from "react-bootstrap";
 import styles from "@/styles/Navbar.module.css";
 import { useCart } from "@/context/CartContext";
+import api from "@/services/api";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import cartModalStyles from "@/styles/CartModal.module.css";
 
 export default function Navbar() {
   const { cartItems, removeFromCart } = useCart();
   const [showModal, setShowModal] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
+          const response = await api.get("/users/me", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setUserRole(response.data.role);
+        }
+      } catch (error) {
+        console.error("Error fetching user role:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUserRole();
+  }, []);
 
   const groupedItems = cartItems.reduce((acc, item) => {
     const itemId = String(item.id || item._id);
@@ -32,16 +54,18 @@ export default function Navbar() {
     ? groupedItems.reduce((sum, item) => sum + (item.quantity || 0), 0)
     : 0;
 
+  if (loading) return null; // Evitar renderizado mientras se carga el rol
+
   return (
     <>
       <nav className={styles.navbar}>
         <ul>
           <li><Link href="/">Inicio</Link></li>
           <li><Link href="/products">Productos</Link></li>
-          <li><Link href="/users">Usuarios</Link></li>
           <li><Link href="/auth">Iniciar Sesión</Link></li>
           <li><Link href="/pasarelas" className="btn btn-primary">Ir a Pasarelas</Link></li>
           <li><Link href="/contact">Contacto</Link></li>
+          {userRole === "admin" && <li><Link href="/admin/dashboard">Perfil</Link></li>}
           <li className={styles.cartContainer}>
             <div className={styles.cartLink} onClick={() => setShowModal(true)}>
               <i className={`bi bi-cart3 ${styles.cartIcon}`}></i>

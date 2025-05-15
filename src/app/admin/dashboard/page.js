@@ -136,7 +136,7 @@ export default function AdminDashboard() {
               onChange={(e) => setSearch(e.target.value)}
               className="mb-4"
             />
-            <Table striped bordered hover>
+            <Table striped bordered hover className={styles.userTable}>
               <thead>
                 <tr>
                   <th>Nombre</th>

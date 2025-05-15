@@ -23,5 +23,8 @@ export const getProductById = (id) => api.get(`/products/${id}`);
 export const createProduct = (productData) => api.post("/products", productData);
 export const loginUser = (credentials) => api.post("/auth/login", credentials);
 export const createUser = (userData) => api.post("/auth/register", userData);
+export const getUsers = () => api.get("/users");
+export const deleteUser = (id) => api.delete(`/users/${id}`);
+export const updateUser = (id, userData) => api.put(`/users/${id}`, userData);
 
 export default api;
