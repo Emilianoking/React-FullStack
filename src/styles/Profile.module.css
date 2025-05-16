@@ -1,0 +1,49 @@
+.profileContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #F0F8FA 0%, #E6F0FA 100%);
+  padding: 80px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.profileCard {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #FFFFFF;
+  text-align: center;
+  padding: 20px;
+}
+
+.profileImageContainer {
+  margin-bottom: 20px;
+}
+
+.profileImage {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.profileTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #78B4DC;
+  margin-bottom: 20px;
+}
+
+.editButton {
+  margin-top: 20px;
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 50px;
+}
+
+.loading {
+  text-align: center;
+  padding: 50px;
+  color: #78B4DC;
+  font-size: 1.2rem;
+}

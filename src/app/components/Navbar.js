@@ -12,27 +12,39 @@ export default function Navbar() {
   const { cartItems, removeFromCart } = useCart();
   const [showModal, setShowModal] = useState(false);
   const [userRole, setUserRole] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUserRole = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        console.log("Token from localStorage:", token); // Log para verificar el token
-        if (token) {
-          const response = await api.get("/users/me", {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          setUserRole(response.data.role);
-        }
-      } catch (error) {
-        console.error("Error fetching user role:", error);
-      } finally {
-        setLoading(false);
+  const fetchUserRole = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      console.log("Token en localStorage:", token); // Añade este log
+      if (token) {
+        const response = await api.get("/users/me", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUserRole(response.data.role);
+        setIsAuthenticated(true);
+      } else {
+        setIsAuthenticated(false);
       }
-    };
-    fetchUserRole();
-  }, []);
+    } catch (error) {
+      console.error("Error fetching user role:", error);
+      localStorage.removeItem("token"); // Limpia token inválido
+      setIsAuthenticated(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchUserRole();
+}, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setIsAuthenticated(false);
+    setUserRole(null);
+  };
 
   const groupedItems = cartItems.reduce((acc, item) => {
     const itemId = String(item.id || item._id);
@@ -57,17 +69,28 @@ export default function Navbar() {
 
   if (loading) return null;
 
+  const profileLink = userRole === "admin" ? "/admin/dashboard" : "/profile";
+
   return (
     <>
       <nav className={styles.navbar}>
         <ul>
           <li><Link href="/">Inicio</Link></li>
           <li><Link href="/products">Productos</Link></li>
-          <li><Link href="/users">Usuarios</Link></li>
-          <li><Link href="/auth">Iniciar Sesión</Link></li>
+          {isAuthenticated ? (
+            <>
+              <li><Link href={profileLink}>Perfil</Link></li>
+              <li>
+                <Button variant="link" onClick={handleLogout} className={styles.logoutButton}>
+                  Cerrar Sesión
+                </Button>
+              </li>
+            </>
+          ) : (
+            <li><Link href="/auth">Iniciar Sesión</Link></li>
+          )}
           <li><Link href="/pasarelas" className="btn btn-primary">Ir a Pasarelas</Link></li>
           <li><Link href="/contact">Contacto</Link></li>
-          {userRole === "admin" && <li><Link href="/admin/dashboard">Perfil</Link></li>}
           <li className={styles.cartContainer}>
             <div className={styles.cartLink} onClick={() => setShowModal(true)}>
               <i className={`bi bi-cart3 ${styles.cartIcon}`}></i>

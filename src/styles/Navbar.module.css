@@ -70,3 +70,19 @@
     line-height: 1;
     border: 1px solid rgba(255, 255, 255, 0.5); /* Borde blanco sutil */
 }
+.logoutButton {
+  color: #FFFFFF; /* Texto blanco para consistencia */
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: rgba(255, 77, 77, 0.2); /* Fondo rojo traslúcido similar al badge */
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil al estilo glass */
+}
+
+.logoutButton:hover {
+  background-color: rgba(255, 77, 77, 0.4); /* Rojo más oscuro al pasar el mouse */
+  color: #AADCC8; /* Verde menta claro para consistencia con otros hover */
+}
