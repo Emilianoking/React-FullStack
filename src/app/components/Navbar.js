@@ -7,6 +7,7 @@ import { useCart } from "@/context/CartContext";
 import api from "@/services/api";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import cartModalStyles from "@/styles/CartModal.module.css";
+import jsPDF from "jspdf"; // Importar jsPDF
 
 export default function Navbar() {
   const { cartItems, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
@@ -66,6 +67,44 @@ export default function Navbar() {
   const totalItems = groupedItems.length > 0
     ? groupedItems.reduce((sum, item) => sum + (item.quantity || 0), 0)
     : 0;
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text("Factura de Compra", 20, 20);
+    doc.setFontSize(12);
+    doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 20, 30);
+
+    let yPosition = 50;
+    doc.setFontSize(14);
+    doc.text("Detalles del Carrito:", 20, yPosition);
+    yPosition += 10;
+
+    groupedItems.forEach((item, index) => {
+      const productName = item.title || item.name || "Producto sin nombre";
+      const price = (item.price || 0).toFixed(2);
+      const quantity = item.quantity || 1;
+      const subtotal = item.subtotal.toFixed(2);
+      doc.text(
+        `${index + 1}. ${productName} - $${price} x ${quantity} = $${subtotal}`,
+        20,
+        yPosition
+      );
+      yPosition += 10;
+    });
+
+    yPosition += 10;
+    doc.setFontSize(14);
+    doc.text(`Total: $${total}`, 20, yPosition);
+
+    // Añadir el QR de Nequi
+    const qrImage = "/images/nequi.jpeg";
+    doc.addImage(qrImage, "jpeg", 140, 20, 50, 50); // Posición (x, y), tamaño (ancho, alto)
+    doc.setFontSize(10);
+    doc.text("Escanea para pagar con Nequi", 140, 75);
+
+    doc.save(`factura_${new Date().toISOString().split('T')[0]}.pdf`);
+  };
 
   if (loading) return null;
 
@@ -171,6 +210,13 @@ export default function Navbar() {
           </Button>
           {groupedItems.length > 0 && (
             <>
+              <Button
+                variant="outline-primary"
+                onClick={generatePDF}
+                className={cartModalStyles.checkoutButton}
+              >
+                Descargar Factura
+              </Button>
               <Button
                 className={cartModalStyles.checkoutButton}
                 onClick={() => setShowModal(false)}
