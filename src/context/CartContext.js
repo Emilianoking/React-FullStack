@@ -8,13 +8,12 @@ export function CartProvider({ children }) {
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
-      // Convertimos los IDs a string para evitar problemas de comparación
-      const productId = String(product.id);
-      const existingItem = prevItems.find((item) => String(item.id) === productId);
+      const productId = String(product.id || product._id);
+      const existingItem = prevItems.find((item) => String(item.id || item._id) === productId);
 
       if (existingItem) {
         return prevItems.map((item) =>
-          String(item.id) === productId
+          String(item.id || item._id) === productId
             ? { ...item, quantity: (item.quantity || 1) + 1 }
             : item
         );
@@ -24,12 +23,36 @@ export function CartProvider({ children }) {
     });
   };
 
+  const increaseQuantity = (productId) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        String(item.id || item._id) === String(productId)
+          ? { ...item, quantity: (item.quantity || 1) + 1 }
+          : item
+      )
+    );
+  };
+
+  const decreaseQuantity = (productId) => {
+    setCartItems((prevItems) => {
+      const item = prevItems.find((item) => String(item.id || item._id) === String(productId));
+      if (item.quantity <= 1) {
+        return prevItems.filter((item) => String(item.id || item._id) !== String(productId));
+      }
+      return prevItems.map((item) =>
+        String(item.id || item._id) === String(productId)
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      );
+    });
+  };
+
   const removeFromCart = (productId) => {
-    setCartItems((prevItems) => prevItems.filter((item) => String(item.id) !== String(productId)));
+    setCartItems((prevItems) => prevItems.filter((item) => String(item.id || item._id) !== String(productId)));
   };
 
   return (
-    <CartContext.Provider value={{ cartItems, addToCart, removeFromCart }}>
+    <CartContext.Provider value={{ cartItems, addToCart, increaseQuantity, decreaseQuantity, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );

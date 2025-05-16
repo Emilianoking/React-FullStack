@@ -103,3 +103,15 @@
     background-color: #78B4DC !important;
     border-color: #78B4DC !important;
   }
+  .quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.quantity {
+  font-weight: bold;
+  min-width: 20px;
+  text-align: center;
+}

@@ -9,36 +9,36 @@ import "bootstrap-icons/font/bootstrap-icons.min.css";
 import cartModalStyles from "@/styles/CartModal.module.css";
 
 export default function Navbar() {
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, removeFromCart, increaseQuantity, decreaseQuantity } = useCart();
   const [showModal, setShowModal] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  const fetchUserRole = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      console.log("Token en localStorage:", token); // Añade este log
-      if (token) {
-        const response = await api.get("/users/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUserRole(response.data.role);
-        setIsAuthenticated(true);
-      } else {
+    const fetchUserRole = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        console.log("Token en localStorage:", token);
+        if (token) {
+          const response = await api.get("/users/me", {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setUserRole(response.data.role);
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error("Error fetching user role:", error);
+        localStorage.removeItem("token");
         setIsAuthenticated(false);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.error("Error fetching user role:", error);
-      localStorage.removeItem("token"); // Limpia token inválido
-      setIsAuthenticated(false);
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchUserRole();
-}, []);
+    };
+    fetchUserRole();
+  }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -89,7 +89,6 @@ export default function Navbar() {
           ) : (
             <li><Link href="/auth">Iniciar Sesión</Link></li>
           )}
-          <li><Link href="/pasarelas" className="btn btn-primary">Ir a Pasarelas</Link></li>
           <li><Link href="/contact">Contacto</Link></li>
           <li className={styles.cartContainer}>
             <div className={styles.cartLink} onClick={() => setShowModal(true)}>
@@ -126,6 +125,23 @@ export default function Navbar() {
                           Precio: ${(item.price || 0).toFixed(2)} x {item.quantity || 1} = $
                           {item.subtotal.toFixed(2)}
                         </p>
+                        <div className={cartModalStyles.quantityControls}>
+                          <Button
+                            variant="outline-secondary"
+                            size="sm"
+                            onClick={() => decreaseQuantity(item.id || item._id)}
+                          >
+                            −
+                          </Button>
+                          <span className={cartModalStyles.quantity}>{item.quantity}</span>
+                          <Button
+                            variant="outline-secondary"
+                            size="sm"
+                            onClick={() => increaseQuantity(item.id || item._id)}
+                          >
+                            +
+                          </Button>
+                        </div>
                         <Button
                           variant="danger"
                           size="sm"
@@ -154,12 +170,23 @@ export default function Navbar() {
             Cerrar
           </Button>
           {groupedItems.length > 0 && (
-            <Button
-              className={cartModalStyles.checkoutButton}
-              onClick={() => setShowModal(false)}
-            >
-              Proceder al Pago
-            </Button>
+            <>
+              <Button
+                className={cartModalStyles.checkoutButton}
+                onClick={() => setShowModal(false)}
+              >
+                Proceder al Pago
+              </Button>
+              <Link href="/pasarelas" passHref>
+                <Button
+                  variant="primary"
+                  onClick={() => setShowModal(false)}
+                  className={cartModalStyles.checkoutButton}
+                >
+                  Ir a Pasarelas
+                </Button>
+              </Link>
+            </>
           )}
         </Modal.Footer>
       </Modal>
