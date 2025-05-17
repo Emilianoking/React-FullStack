@@ -29,7 +29,16 @@ export default function Home() {
   }, []);
 
   return (
+    
     <div>
+      <a
+        href="https://wa.me/+573132263927"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.whatsappButton}
+      >
+        <i className="bi bi-whatsapp"></i>
+      </a>
       {/* Banner Promocional debajo del Navbar */}
       <PromoBanner />
 
