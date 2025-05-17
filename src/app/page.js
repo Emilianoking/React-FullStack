@@ -6,6 +6,7 @@ import { useCart } from "@/context/CartContext";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import styles from "@/styles/Home.module.css";
 import { getProducts } from "@/services/api"; // Importa la función de Axios
+import PromoBanner from "@/app/components/PromoBanner"; // Importamos el componente
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -29,6 +30,9 @@ export default function Home() {
 
   return (
     <div>
+      {/* Banner Promocional debajo del Navbar */}
+      <PromoBanner />
+
       {/* Hero Section */}
       <section className={styles.heroSection}>
         <Container>
@@ -77,7 +81,40 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* Sección de Llamada a la Acción y Beneficios (sin cambios) */}
+      {/* Sección de Testimonios */}
+      <section className={styles.blogSection}>
+        <Container>
+          <h2 className={styles.blogTitle}>Lo que dicen nuestros clientes</h2>
+          <Row>
+            <Col md={4} className="mb-4">
+              <div className={styles.testimonialCard}>
+                <p className={styles.testimonialText}>
+                  "¡Gran experiencia de compra! Los productos llegaron rápido y en perfectas condiciones."
+                </p>
+                <p className={styles.testimonialAuthor}>- Juan Pérez</p>
+              </div>
+            </Col>
+            <Col md={4} className="mb-4">
+              <div className={styles.testimonialCard}>
+                <p className={styles.testimonialText}>
+                  "Me encantó la variedad de productos, y el servicio al cliente fue excepcional."
+                </p>
+                <p className={styles.testimonialAuthor}>- María Gómez</p>
+              </div>
+            </Col>
+            <Col md={4} className="mb-4">
+              <div className={styles.testimonialCard}>
+                <p className={styles.testimonialText}>
+                  "Todo llegó a tiempo y los precios son muy competitivos. ¡Recomendado!"
+                </p>
+                <p className={styles.testimonialAuthor}>- Carlos López</p>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      </section>
+
+      {/* Sección de Llamada a la Acción */}
       <section className={styles.ctaSection}>
         <Container>
           <h2 className={styles.ctaTitle}>¿Listo para Comprar?</h2>
@@ -93,6 +130,7 @@ export default function Home() {
         </Container>
       </section>
 
+      {/* Sección de Beneficios (Por Qué Elegirnos) */}
       <section className={styles.benefitsSection}>
         <Container>
           <h2 className={styles.benefitsTitle}>Por Qué Elegirnos</h2>
